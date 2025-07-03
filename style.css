@@ -1,0 +1,405 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+   
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main{
+    margin: 20px;
+    height: 40rem;
+  
+    width: 25rem;
+    
+  
+    display:  flex;
+    justify-content: center;
+    
+    overflow-y: hidden;
+   
+    
+    background: linear-gradient(120deg ,rgba(54, 23, 212, 0.821) ,rgba(88, 73, 186, 0.788));
+    min-width: 0;
+    word-wrap: break-word;
+    
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+  
+}
+
+.container{
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    
+    height:100%;
+   
+    width: 95%;
+    margin-top: 5px;
+    scrollbar-width: none;
+     padding-bottom: 1rem;
+}
+.container::-webkit-scrollbar{
+    display: none;
+}
+.weather-info{
+     margin: 10px;
+    height: auto;
+    padding-bottom: 1rem;
+    background: linear-gradient(27deg , rgba(89, 12, 171, 0.200) , rgba(202, 24, 119, 0.200));
+    width: 80%;
+    display:  flex;
+    align-items: center;
+    overflow: hidden;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+   
+    border-radius: .25rem;
+    display: flex;
+    flex-direction: column;
+     
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 0.25rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+  .nav{
+       
+        width: 100%;
+        height: 3rem;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+    .search{
+       width: 70%;
+       height: 2.5rem;
+       padding: 0 10px;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+     backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.771);
+
+  border-radius: 0.25rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+    .locationIcon{
+        width: 2.5rem;
+        height: 80%;
+        padding: 0.5rem;
+        background:rgba(240, 240, 240, 0.199);
+        background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+     backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 0.25rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+    .wrapper{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        
+        
+        margin: 0.5rem 0;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .city{
+        font-size: clamp(18px , 4vw ,20px);
+        margin-top: 12px;
+        color: white;
+    }
+    .city-header{
+      width: 7rem;
+      height: 40px;
+     position: relative;
+     display: flex;
+     
+      gap: 15px;
+    }
+    .city-img{
+      height: 25px;
+      width: auto;
+      
+     
+      position: absolute;
+      bottom: 4px;
+      right: 8px;
+
+    }
+    .current-weather-img{
+        width: 14rem;
+        height: 12rem;
+       
+    }
+    .current-weather-condi{
+        font-size: 1.4rem;
+        font-family: sans-serif;
+        color: rgba(0, 0, 0, 0.727);
+        margin-top: -28px;
+    }
+    .current-date{
+        font-size: 0.9rem;
+        margin: 5px 0;
+    }
+    .current-temp{
+        font-size: 3rem;
+        position: relative;
+        margin: 10px 0;
+        color: white;
+    }
+    .current-temp sup{
+        position: absolute;
+        font-size: 1.4rem;
+        width: 3rem;
+      
+        top: 0; 
+        font-family: sans-serif;
+        
+    }
+    .current-anthoer-data{
+        width: 97%;
+        height: 6rem;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        
+        
+    }
+     .current-another-condi{
+        list-style: none;
+        width: 5rem;
+        height: 6rem;
+        background-color: #28a9e0;
+         background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px ;
+    line-height: 15px;
+    } 
+
+    .small-card{
+       width: 4rem;
+      height: 3rem;
+     
+      margin: 5px 0;
+      border: none;
+    }
+    .current-another-condi-info{
+      font-size: 13px;
+    }
+   
+    .condition{
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+     
+  .Fourday-weather-info{
+     display: flex;
+     gap: 15px;
+     flex-wrap: wrap;
+    
+    /* overflow-y: auto; */
+    gap: 1rem;
+    /* scrollbar-width: none; */
+  }
+    .today-wrapper{
+        width: 100%;
+        height: auto;
+        padding: 5px;
+        
+        /* background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem; */
+    
+   
+    }
+   
+    .today-weather-info {
+      display: flex;
+     
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 5px 5px ;
+      scrollbar-width: none;
+      
+    }
+    .today-weather-info::-webkit-scrollbar {
+      display: none;
+    }
+    .today-weather-info-card {
+     width: 5rem;
+      height: 100px;
+      background: rgba(185, 192, 130, 0.675);
+      border-radius: 0.25rem;
+      flex-shrink: 0;
+      display: flex;
+       flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .today-small-card{
+      width: 4rem;
+      height: 3rem;
+     
+    }
+
+  .wrapper-header{
+    width: 100%;
+    height: 1rem;
+    display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 0.5rem;
+  }
+  .wrapper-headline{
+    font-size: 15px;
+    font-family: serif;
+  }
+  .see-more{
+    font-size: 15px;
+    font-weight: 600;
+   color: white;
+  }
+  .Fourday-weather-info-card{
+    width: 11.3rem; 
+    height: 100px;
+    background: rgb(116, 98, 98);
+    flex-shrink: 0; 
+    border: 1px solid #ccc;
+       background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+   
+  }
+
+  .about_weather{
+    width: 40%;
+    height: 100%;
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .img-about-weather-4day{
+    width: 95%;
+    height: 3.5rem;
+   
+  }
+.about_weather_condi_headline_4day{
+  font-size: 0.9rem;
+  font-weight: bold;
+  font-family: sans-serif;
+  width: 100%;
+  height: 4.5rem;
+ margin-top: -6px;
+  text-align: center;
+  line-height: 0.9rem;
+}
+  .about_weather_other{
+     width: 60%;
+    height: 100%;
+    
+  }
+
+  .weather_at_day{
+  text-align: end;
+  font-size: 1rem;
+  font-weight:600;
+  color: rgb(78, 74, 74);
+  }
+  .weather_at_day_info{
+    width: 100%;
+    height: calc(100% - 1.2rem);
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+    
+     color: white;
+  }
+.weather_at_day_temp{
+   font-size: 1.5rem;
+   font-weight: bold;
+}
+.weather_at_day_wind{
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.current-another-condi,
+.today-weather-info-card ,.Fourday-weather-info-card  {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.current-another-condi:hover,
+.today-weather-info-card:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.3);
+}
+.Fourday-weather-info-card:hover{
+     
+  transition: all 0.3s ease;
+  cursor: pointer;
+ 
+  background: rgba(255, 255, 255, 0.3); 
+}
+
+
+ @media (max-width:550px) {
+
+    .main{
+        width:25rem;
+        
+      
+    }
+    
+     .current-anthoer-data{
+       
+        gap: 8px;
+        
+    }
+  
+ }
+
+  /* @media (max-width:430px) {
+    .Fourday-weather-info-card{
+        width: 10rem;
+        
+    }
+  } */
