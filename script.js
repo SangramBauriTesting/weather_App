@@ -1,4 +1,4 @@
-import {data , currentData} from './data.js';
+import {data , currentData} from './api.js';
 
 //selector
 // const city=document.querySelector('.city');
