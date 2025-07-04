@@ -1,49 +1,49 @@
 import {data , currentData} from './data.js';
 
 //selector
-const city=document.querySelector('.city');
-const currentImg = document.querySelector('.current-weather-img');
-const currentCondi = document.querySelector('.current-weather-condi');
-const currentDate = document.querySelector('.current-date');
-const currentTemp = document.querySelector('.current-temp');
-//create another current card
-const cityName =  currentData.name;
-city.innerHTML=`${cityName}`;
-//current weather image 
-const currIcon = currentData.weather[0].icon;
-const currDescription = currentData.weather[0].description;
-const currCondi = currentData.weather[0].main;
-const currdate = new Date().toDateString();
-const currTemp=currentData.main.temp;
-currentImg.src = `https://openweathermap.org/img/wn/${currIcon}@4x.png`;
-currentImg.alt = currDescription;
-currentCondi.innerHTML=currCondi;
-currentDate.innerHTML=currdate;
-currentTemp.innerHTML=`${Math.round(currTemp)}<sup>°C</sup>`;
-const currAnotherPercentage = document.createElement('h5');
-const currAnotherWeather = document.createElement('h5');
-const currAnotherData = document.querySelector('.current-anthoer-data').children;
-const arrCurrAnotherData =Array.from(currAnotherData);
+// const city=document.querySelector('.city');
+// const currentImg = document.querySelector('.current-weather-img');
+// const currentCondi = document.querySelector('.current-weather-condi');
+// const currentDate = document.querySelector('.current-date');
+// const currentTemp = document.querySelector('.current-temp');
+// //create another current card
+// const cityName =  currentData.name;
+// city.innerHTML=`${cityName}`;
+// //current weather image 
+// const currIcon = currentData.weather[0].icon;
+// const currDescription = currentData.weather[0].description;
+// const currCondi = currentData.weather[0].main;
+// const currdate = new Date().toDateString();
+// const currTemp=currentData.main.temp;
+// currentImg.src = `https://openweathermap.org/img/wn/${currIcon}@4x.png`;
+// currentImg.alt = currDescription;
+// currentCondi.innerHTML=currCondi;
+// currentDate.innerHTML=currdate;
+// currentTemp.innerHTML=`${Math.round(currTemp)}<sup>°C</sup>`;
+// const currAnotherPercentage = document.createElement('h5');
+// const currAnotherWeather = document.createElement('h5');
+// const currAnotherData = document.querySelector('.current-anthoer-data').children;
+// const arrCurrAnotherData =Array.from(currAnotherData);
 
-for (let index = 0; index < arrCurrAnotherData.length; index++) {
+// for (let index = 0; index < arrCurrAnotherData.length; index++) {
   
-  if(index==0)
-  {
-   currAnotherData[0].children[1].innerHTML=`${currentData.main.humidity}%`;
-   currAnotherData[0].children[2].innerHTML="Humidity";
-  }
-  if(index==1)
-  {
-    currAnotherData[1].children[1].innerHTML=`${currentData.wind.speed}`;
-   currAnotherData[1].children[2].innerHTML="Wind";
-  }
-   if(index==2)
-  {
-    currAnotherData[2].children[1].innerHTML=`${100 - currentData.clouds.all}%`;
-   currAnotherData[2].children[2].innerHTML="Sunny";
-  }
+//   if(index==0)
+//   {
+//    currAnotherData[0].children[1].innerHTML=`${currentData.main.humidity}%`;
+//    currAnotherData[0].children[2].innerHTML="Humidity";
+//   }
+//   if(index==1)
+//   {
+//     currAnotherData[1].children[1].innerHTML=`${currentData.wind.speed}`;
+//    currAnotherData[1].children[2].innerHTML="Wind";
+//   }
+//    if(index==2)
+//   {
+//     currAnotherData[2].children[1].innerHTML=`${100 - currentData.clouds.all}%`;
+//    currAnotherData[2].children[2].innerHTML="Sunny";
+//   }
   
-}
+// }
 
 //=======================================================================================================
 function getWeatherIcon(description) {
