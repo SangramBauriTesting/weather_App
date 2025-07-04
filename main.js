@@ -1,4 +1,4 @@
-import { getCurrentWeatherUsingCoordinate } from "./api.js";
+import { getCurrentWeatherUsingCoordinate ,  getCurrentWeatherUsingCityName} from "./api.js";
 import {CurrentWeatherUI , ForecastWeatherUI} from "./ui.js";
 
 
@@ -17,10 +17,16 @@ import {CurrentWeatherUI , ForecastWeatherUI} from "./ui.js";
 //select search input 
 const userInput = document.getElementById("cityInput");
 
-userInput.addEventListener("keydown",(e)=>{
+userInput.addEventListener("keydown",async (e)=>{
    if (e.key === "Enter")
     {
-        
+  const response = await getCurrentWeatherUsingCityName(userInput.value);
+  console.log("Current weather data: city", response.current);
+  console.log("Forecast data: city", response.forecast);
+
+  CurrentWeatherUI(response.current);
+  ForecastWeatherUI(response.forecast);
+  userInput.value='';
     }
 })
 
@@ -41,7 +47,6 @@ async function getWeatherDataAfterClickLoc() {
    
  
 }
-
 
 getLocationBtn.addEventListener('click',getWeatherDataAfterClickLoc);
 

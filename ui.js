@@ -99,170 +99,139 @@ function getTime(hour)
 
 
 }
-function ForecastWeatherUI(data)
-{
-  const today_weather_info=document.querySelector('.today-weather-info');
+
+
+function ForecastWeatherUI(data) {
+  // Clear previous hourly forecast
+  const today_weather_info = document.querySelector('.today-weather-info');
+  today_weather_info.innerHTML = "";
+
+  // Clear previous 4-day forecast
+  const Fourday_weather_info = document.querySelector('.Fourday-weather-info');
+  Fourday_weather_info.innerHTML = "";
+
+  // hourly forecast (first 10 entries)
   const few_hour_report = data.list;
-  
-  for (const index in few_hour_report) {
-      
-      const description = data.list[index].weather[0].description;
-      const imgLink = getWeatherIcon(description);
-  
-      if(index ==10)
-      {
-      break;
-      }
-  
-      const timeDateSplit = data.list[index].dt_txt.split(' ');
-      const timeArr = timeDateSplit[1].split(':').slice(0,2);
-  
-      const weather_at_time = `${getTime(timeArr[0])}:${timeArr[1]}`
-  
-      const weather_at_temp = data.list[index].main.temp;
-      const today_weather_info_card = document.createElement('div');
-      today_weather_info_card.setAttribute('class','today-weather-info-card');
-      const img = document.createElement('img');
-      img.setAttribute('class','today-small-card');
-      img.setAttribute('src',`${imgLink}`)
-      const time=document.createElement('h5');
-      time.setAttribute('class','current-another-condi-info');
-      time.innerHTML=weather_at_time;
-      const temp = document.createElement('h5');
-      temp.setAttribute('class','current-another-condi-info condition');
-      temp.innerHTML=`${weather_at_temp} <sup>°C</sup>`;
-      today_weather_info_card.appendChild(img);
-      today_weather_info_card.appendChild(time);
-      today_weather_info_card.appendChild(temp);
-      today_weather_info.appendChild(today_weather_info_card);
-  
+  for (let index = 0; index < 10; index++) {
+    const report = few_hour_report[index];
+    if (!report) continue;
+
+    const description = report.weather[0].description;
+    const imgLink = getWeatherIcon(description);
+
+    const timeDateSplit = report.dt_txt.split(' ');
+    const timeArr = timeDateSplit[1].split(':').slice(0,2);
+    const weather_at_time = `${getTime(timeArr[0])}:${timeArr[1]}`;
+
+    const weather_at_temp = report.main.temp;
+
+    const today_weather_info_card = document.createElement('div');
+    today_weather_info_card.className = "today-weather-info-card";
+
+    const img = document.createElement('img');
+    img.className = "today-small-card";
+    img.src = imgLink;
+
+    const time = document.createElement('h5');
+    time.className = "current-another-condi-info";
+    time.textContent = weather_at_time;
+
+    const temp = document.createElement('h5');
+    temp.className = "current-another-condi-info condition";
+    temp.innerHTML = `${weather_at_temp}<sup>°C</sup>`;
+
+    today_weather_info_card.appendChild(img);
+    today_weather_info_card.appendChild(time);
+    today_weather_info_card.appendChild(temp);
+
+    today_weather_info.appendChild(today_weather_info_card);
   }
-  
-  
-  
-  function getFutureData(data) {
-    const now = new Date(); // current time
-    const futureData = data.list.filter((item) => {
-      const itemTime = new Date(item.dt_txt);
-      return itemTime > now; // keep only future entries
-    });
-  
-  return futureData;
-  }
-  
-  
-  const futData =getFutureData(data);
-  let arr=[];
-  
-  function weatherDay(data, arr){
-    let now  =  new Date().toLocaleDateString();
-    const dayN= new Date(now).getDate();
-   let count =1 ;
-   let track=4;
+
+  // future data logic
+  const now = new Date();
+  const futData = data.list.filter(item => new Date(item.dt_txt) > now);
+
+  function weatherDay(data) {
+    const arr = [];
+    const todayDate = new Date().getDate();
+    let count = 1;
+    let track = 4;
+
     for (let index = 0; index < 4; index++) {
-     let obj=[];
-      for (const element of futData) {
-           
-          const date = new Date(element.dt_txt).getDate();
-  
-          if(date == dayN+count && track !=0 )
-          { 
-              obj.push(element); 
-          }
-         
+      let obj = [];
+      for (const element of data) {
+        const date = new Date(element.dt_txt).getDate();
+        if (date === todayDate + count && track !== 0) {
+          obj.push(element);
+        }
       }
-  
       arr.push(obj);
       count++;
       track--;
-       
     }
+    return arr;
   }
-  
-  weatherDay(futData,arr)
-  
-  console.log(arr);
-  
-  //=========================================================================
-  
-  const Fourday_weather_info=document.querySelector('.Fourday-weather-info');
-  
-  
-  
-  const Fourday_weather_arr = arr;
-  
-  
-  
-  
+
+  const Fourday_weather_arr = weatherDay(futData);
+
   for (let index = 0; index < 4; index++) {
-   
-    const dayInfo = (Fourday_weather_arr[index])[0];
-    console.log(dayInfo)
+    const dayInfoArr = Fourday_weather_arr[index];
+    if (!dayInfoArr || dayInfoArr.length === 0) continue;
+
+    const dayInfo = dayInfoArr[0]; // use first element of the day
+
     const description = dayInfo.weather[0].description;
-  const imgLink = getWeatherIcon(description);
-  const date_obj = new Date(dayInfo.dt_txt);
-  const dayName = date_obj.toLocaleDateString("en-US", { weekday: "short" });
-  
-  
-  const card = document.createElement("div");
-  card.className = "Fourday-weather-info-card";
-  
-  const aboutWeather = document.createElement("div");
-  aboutWeather.className = "about_weather";
-  
-  
-  const img = document.createElement("img");
-  img.className = "img-about-weather-4day";
-  img.src = `${imgLink}`;  
-  
-  
-  const condition = document.createElement("h5");
-  condition.className = "about_weather_condi_headline_4day";
-  condition.textContent = `${description}`; 
-  
-  aboutWeather.appendChild(img);
-  aboutWeather.appendChild(condition);
-  
-  const other = document.createElement("div");
-  other.className = "about_weather_other";
-  
-  
-  const day = document.createElement("p");
-  day.className = "weather_at_day";
-  day.textContent = `${dayName}`;  
-  
-  
-  const info = document.createElement("div");
-  info.className = "weather_at_day_info";
-  
-  
-  const temp = document.createElement("h5");
-  temp.className = "weather_at_day_temp";
-  temp.innerHTML = `${Math.round(dayInfo.main.temp)}<sup>°C</sup>`;  // dynamically
-  
-  
-  const wind = document.createElement("h6");
-  wind.className = "weather_at_day_wind";
-  wind.textContent = `Wind : ${dayInfo.wind.speed}`;  
-  
-  info.appendChild(temp);
-  info.appendChild(wind);
-  
-  other.appendChild(day);
-  other.appendChild(info);
-  
-  
-  card.appendChild(aboutWeather);
-  card.appendChild(other);
-  
-  
-  Fourday_weather_info.appendChild(card);
-  
-  
-  
-    
+    const imgLink = getWeatherIcon(description);
+    const date_obj = new Date(dayInfo.dt_txt);
+    const dayName = date_obj.toLocaleDateString("en-US", { weekday: "short" });
+
+    const card = document.createElement("div");
+    card.className = "Fourday-weather-info-card";
+
+    const aboutWeather = document.createElement("div");
+    aboutWeather.className = "about_weather";
+
+    const img = document.createElement("img");
+    img.className = "img-about-weather-4day";
+    img.src = imgLink;
+    img.alt = description;
+
+    const condition = document.createElement("h5");
+    condition.className = "about_weather_condi_headline_4day";
+    condition.textContent = description;
+
+    aboutWeather.appendChild(img);
+    aboutWeather.appendChild(condition);
+
+    const other = document.createElement("div");
+    other.className = "about_weather_other";
+
+    const day = document.createElement("p");
+    day.className = "weather_at_day";
+    day.textContent = dayName;
+
+    const info = document.createElement("div");
+    info.className = "weather_at_day_info";
+
+    const temp = document.createElement("h5");
+    temp.className = "weather_at_day_temp";
+    temp.innerHTML = `${Math.round(dayInfo.main.temp)}<sup>°C</sup>`;
+
+    const wind = document.createElement("h6");
+    wind.className = "weather_at_day_wind";
+    wind.textContent = `Wind: ${dayInfo.wind.speed}`;
+
+    info.appendChild(temp);
+    info.appendChild(wind);
+
+    other.appendChild(day);
+    other.appendChild(info);
+
+    card.appendChild(aboutWeather);
+    card.appendChild(other);
+
+    Fourday_weather_info.appendChild(card);
   }
-  
 }
 
 

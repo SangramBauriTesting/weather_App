@@ -28,7 +28,28 @@ function getCurrentLocation() {
   });
 }
 
-export { getCurrentWeatherUsingCoordinate };
+async function getCurrentWeatherUsingCityName(city) {
+  
+  const currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ee588b9efb46731108f936f990dd108a&units=metric`
+  const forecastUrl=`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ee588b9efb46731108f936f990dd108a&units=metric`;
+
+  const [currentRes, forecastRes] = await Promise.all([
+    fetch(currentUrl),
+    fetch(forecastUrl)
+  ]);
+
+  const currentData = await currentRes.json();
+  const forecastData = await forecastRes.json();
+ 
+   return {
+    current: currentData,
+    forecast: forecastData
+  };
+
+}
+
+
+export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 
 
 
