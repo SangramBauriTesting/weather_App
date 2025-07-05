@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather App</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="main">
+  <div class="loader" role="status" id="loading"></div>
+  <div class="main" id="content">
+
+
     <div class="container">
       <nav class="nav">
         <img src="./image/location.png" class="locationIcon">
         <input class="search" placeholder="Search" id="cityInput" />
       </nav>
       <div class="city-header">
-            <h1 class="city"></h1>
-           <img class="city-img" src="https://flagsapi.com/IN/flat/24.png">
+        <h1 class="city">
+
+
+        </h1>
       </div>
-  
+
       <div class="wrapper">
         <div class="weather-info">
-          <img    class="current-weather-img" />
+          <img class="current-weather-img" />
           <h5 class="current-weather-condi"></h5>
-          <p class="current-date">Wed Jun 2 2025</p>
-          <h1 class="current-temp">10 <sup>°C</sup></h1>
+          <p class="current-date"></p>
+          <h1 class="current-temp"> <sup>°C</sup></h1>
           <ul class="current-anthoer-data">
             <li class="current-another-condi">
-              <img class="small-card" src="./image/humi.png" >
-                
-            </img>
-              <h5 class="current-another-condi-info">40%</h5>
-              <h5 class="current-another-condi-info condition">clouds</h5>
+              <img class="small-card" src="./image/humi.png">
+
+              </img>
+              <h5 class="current-another-condi-info"></h5>
+              <h5 class="current-another-condi-info condition"></h5>
             </li>
-             <li class="current-another-condi">
+            <li class="current-another-condi">
               <img class="small-card" src="./image/wind.png">
-                
-            </img>
-              <h5 class="current-another-condi-info">40%</h5>
-              <h5 class="current-another-condi-info condition">clouds</h5>
+
+              </img>
+              <h5 class="current-another-condi-info"></h5>
+              <h5 class="current-another-condi-info condition"></h5>
             </li>
-             </li>
-             <li class="current-another-condi">
-              <img class="small-card" src="./image/sunny.png" >
-                
-            </img>
-              <h5 class="current-another-condi-info">40%</h5>
-              <h5 class="current-another-condi-info condition">clouds</h5>
+            </li>
+            <li class="current-another-condi">
+              <img class="small-card" src="./image/sunny.png">
+
+              </img>
+              <h5 class="current-another-condi-info"></h5>
+              <h5 class="current-another-condi-info condition"></h5>
             </li>
           </ul>
         </div>
@@ -57,13 +63,13 @@
           <h5 class="wrapper-headline">Next fews hours</h5>
           <p class="see-more">See More</p>
         </div>
-          <div class="today-weather-info">
-        
-          
+        <div class="today-weather-info">
+
+
         </div>
       </div>
-      
-      
+
+
 
       <div class="wrapper">
         <div class="wrapper-header">
@@ -87,7 +93,7 @@
                </div>
             </div>
           </div> -->
-         
+
         </div>
       </div>
     </div>
@@ -96,4 +102,5 @@
   <!-- <script type="module" src="data.js"></script> -->
   <script type="module" src="main.js"></script>
 </body>
+
 </html>

@@ -1,94 +1,63 @@
 const API_KEY = "ee588b9efb46731108f936f990dd108a";
 
 async function getCurrentWeatherUsingCoordinate() {
-  const position = await getCurrentLocation();
-  const lat = position.coords.latitude;
-  const lon = position.coords.longitude;
+	const position = await getCurrentLocation();
+	const lat = position.coords.latitude;
+	const lon = position.coords.longitude;
 
-  const currentUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+	const currentUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+	const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
 
-  const [currentRes, forecastRes] = await Promise.all([
-    fetch(currentUrl),
-    fetch(forecastUrl)
-  ]);
+	const [currentRes, forecastRes] = await Promise.all([
+		fetch(currentUrl),
+		fetch(forecastUrl),
+	]);
 
-  const currentData = await currentRes.json();
-  const forecastData = await forecastRes.json();
+	const currentData = await currentRes.json();
+	const forecastData = await forecastRes.json();
 
-  return {
-    current: currentData,
-    forecast: forecastData
-  };
+	return {
+		current: currentData,
+		forecast: forecastData,
+	};
 }
 
 function getCurrentLocation() {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
+	return new Promise((resolve, reject) => {
+		navigator.geolocation.getCurrentPosition(resolve, reject);
+	});
 }
 
 async function getCurrentWeatherUsingCityName(city) {
-  
-  const currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ee588b9efb46731108f936f990dd108a&units=metric`
-  const forecastUrl=`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ee588b9efb46731108f936f990dd108a&units=metric`;
+	const currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ee588b9efb46731108f936f990dd108a&units=metric`;
+	const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ee588b9efb46731108f936f990dd108a&units=metric`;
 
-  const [currentRes, forecastRes] = await Promise.all([
-    fetch(currentUrl),
-    fetch(forecastUrl)
-  ]);
+	const [currentRes, forecastRes] = await Promise.all([
+		fetch(currentUrl),
+		fetch(forecastUrl),
+	]);
 
-  const currentData = await currentRes.json();
-  const forecastData = await forecastRes.json();
- 
-   return {
-    current: currentData,
-    forecast: forecastData
-  };
+	const currentData = await currentRes.json();
+	const forecastData = await forecastRes.json();
 
+	return {
+		current: currentData,
+		forecast: forecastData,
+	};
 }
 
+export { getCurrentWeatherUsingCoordinate, getCurrentWeatherUsingCityName };
 
-export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //api call function 
+// //api call function
 // //api call when user search by the city name
 
 // async function getCurrentWeather() {
 //     try {
-      
+
 //         const res = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Kolkata&appid=ee588b9efb46731108f936f990dd108a&units=metric');
 //         console.log(res); // you can check status
 //         const data = await res.json();
-        
+
 //         getCurrentWeatherData(data);
 //         return data;
 //     } catch (error) {
@@ -102,7 +71,7 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 //api call base on current location
 // async function getCurrentWeatherUsingCoordinate() {
 //     try {
-      
+
 //         const position = await getCurrentPositionAsync();
 //        const lat = position.coords.latitude;
 //         const lon = position.coords.longitude;
@@ -112,7 +81,7 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 //         console.log("current data using geolocation ",data)
 //         const response2 = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=ee588b9efb46731108f936f990dd108a&units=metric`);
 //         const forecast = await response2.json();
-         
+
 //         return {
 //           current : data,
 //           anotherDayForecast : forecast
@@ -121,10 +90,6 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 //         console.log("ERROR: " + error);
 //     }
 // }
-
-
-
-
 
 // function CurrentWeatherUI (currentData)
 // {
@@ -137,7 +102,7 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 // //create another current card
 // const cityName =  currentData.name;
 // city.innerHTML=`${cityName}`;
-// //current weather image 
+// //current weather image
 // const currIcon = currentData.weather[0].icon;
 // const currDescription = currentData.weather[0].description;
 // const currCondi = currentData.weather[0].main;
@@ -154,7 +119,7 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 // const arrCurrAnotherData =Array.from(currAnotherData);
 
 // for (let index = 0; index < arrCurrAnotherData.length; index++) {
-  
+
 //   if(index==0)
 //   {
 //    currAnotherData[0].children[1].innerHTML=`${currentData.main.humidity}%`;
@@ -170,41 +135,30 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 //     currAnotherData[2].children[1].innerHTML=`${100 - currentData.clouds.all}%`;
 //    currAnotherData[2].children[2].innerHTML="Sunny";
 //   }
-  
+
 // }
 // }
-
-
-
-
-
-
-
-
-
-
-
 
 // function anotherWeatherUI(data)
 // {
 //   const today_weather_info=document.querySelector('.today-weather-info');
 //   const few_hour_report = data.list;
-  
+
 //   for (const index in few_hour_report) {
-      
+
 //       const description = data.list[index].weather[0].description;
 //       const imgLink = getWeatherIcon(description);
-  
+
 //       if(index ==10)
 //       {
 //       break;
 //       }
-  
+
 //       const timeDateSplit = data.list[index].dt_txt.split(' ');
 //       const timeArr = timeDateSplit[1].split(':').slice(0,2);
-  
+
 //       const weather_at_time = `${getTime(timeArr[0])}:${timeArr[1]}`
-  
+
 //       const weather_at_temp = data.list[index].main.temp;
 //       const today_weather_info_card = document.createElement('div');
 //       today_weather_info_card.setAttribute('class','today-weather-info-card');
@@ -221,25 +175,22 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 //       today_weather_info_card.appendChild(time);
 //       today_weather_info_card.appendChild(temp);
 //       today_weather_info.appendChild(today_weather_info_card);
-  
+
 //   }
-  
-  
-  
+
 //   function getFutureData(data) {
 //     const now = new Date(); // current time
 //     const futureData = data.list.filter((item) => {
 //       const itemTime = new Date(item.dt_txt);
 //       return itemTime > now; // keep only future entries
 //     });
-  
+
 //   return futureData;
 //   }
-  
-  
+
 //   const futData =getFutureData(data);
 //   let arr=[];
-  
+
 //   function weatherDay(data, arr){
 //     let now  =  new Date().toLocaleDateString();
 //     const dayN= new Date(now).getDate();
@@ -248,123 +199,91 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 //     for (let index = 0; index < 4; index++) {
 //      let obj=[];
 //       for (const element of futData) {
-           
+
 //           const date = new Date(element.dt_txt).getDate();
-  
+
 //           if(date == dayN+count && track !=0 )
-//           { 
-//               obj.push(element); 
+//           {
+//               obj.push(element);
 //           }
-         
+
 //       }
-  
+
 //       arr.push(obj);
 //       count++;
 //       track--;
-       
+
 //     }
 //   }
-  
+
 //   weatherDay(futData,arr)
-  
+
 //   console.log(arr);
-  
+
 //   //=========================================================================
-  
+
 //   const Fourday_weather_info=document.querySelector('.Fourday-weather-info');
-  
-  
-  
+
 //   const Fourday_weather_arr = arr;
-  
-  
-  
-  
+
 //   for (let index = 0; index < 4; index++) {
-   
+
 //     const dayInfo = (Fourday_weather_arr[index])[0];
 //     console.log(dayInfo)
 //     const description = dayInfo.weather[0].description;
 //   const imgLink = getWeatherIcon(description);
 //   const date_obj = new Date(dayInfo.dt_txt);
 //   const dayName = date_obj.toLocaleDateString("en-US", { weekday: "short" });
-  
-  
+
 //   const card = document.createElement("div");
 //   card.className = "Fourday-weather-info-card";
-  
+
 //   const aboutWeather = document.createElement("div");
 //   aboutWeather.className = "about_weather";
-  
-  
+
 //   const img = document.createElement("img");
 //   img.className = "img-about-weather-4day";
-//   img.src = `${imgLink}`;  
-  
-  
+//   img.src = `${imgLink}`;
+
 //   const condition = document.createElement("h5");
 //   condition.className = "about_weather_condi_headline_4day";
-//   condition.textContent = `${description}`; 
-  
+//   condition.textContent = `${description}`;
+
 //   aboutWeather.appendChild(img);
 //   aboutWeather.appendChild(condition);
-  
+
 //   const other = document.createElement("div");
 //   other.className = "about_weather_other";
-  
-  
+
 //   const day = document.createElement("p");
 //   day.className = "weather_at_day";
-//   day.textContent = `${dayName}`;  
-  
-  
+//   day.textContent = `${dayName}`;
+
 //   const info = document.createElement("div");
 //   info.className = "weather_at_day_info";
-  
-  
+
 //   const temp = document.createElement("h5");
 //   temp.className = "weather_at_day_temp";
 //   temp.innerHTML = `${Math.round(dayInfo.main.temp)}<sup>°C</sup>`;  // dynamically
-  
-  
+
 //   const wind = document.createElement("h6");
 //   wind.className = "weather_at_day_wind";
-//   wind.textContent = `Wind : ${dayInfo.wind.speed}`;  
-  
+//   wind.textContent = `Wind : ${dayInfo.wind.speed}`;
+
 //   info.appendChild(temp);
 //   info.appendChild(wind);
-  
+
 //   other.appendChild(day);
 //   other.appendChild(info);
-  
-  
+
 //   card.appendChild(aboutWeather);
 //   card.appendChild(other);
-  
-  
+
 //   Fourday_weather_info.appendChild(card);
-  
-  
-  
-    
+
 //   }
-  
+
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // //when user search by city name
 // // function  getCurrentWeatherData(currentData)
@@ -372,14 +291,11 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 // //     CurrentWeatherUI(currentData);
 // // }
 
-
-
 // function getCurrentPositionAsync() {
 //       return new Promise((resolve, reject) => {
 //         navigator.geolocation.getCurrentPosition(resolve, reject);
 //       });
 //     }
-
 
 // (async ()=>{
 
@@ -388,22 +304,7 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 //  let data = response.anotherDayForecast;
 //   CurrentWeatherUI(currentData);
 //   anotherWeatherUI(data);
-// })();   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// })();
 
 //function of logic
 
@@ -429,14 +330,13 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 //   } else if (description.includes("mist")) {
 //     return "https://openweathermap.org/img/wn/50d@4x.png";
 //   } else {
-   
+
 //     return "https://openweathermap.org/img/wn/01d@4x.png";
 //   }
 // }
 
-
 // function getTime(hour)
-// { 
+// {
 
 //     if(hour[0]==0 && hour[1]!=0)
 //     {
@@ -445,18 +345,16 @@ export { getCurrentWeatherUsingCoordinate , getCurrentWeatherUsingCityName };
 
 //     if(hour > 12)
 //     {
-//     hour=hour-12;  
+//     hour=hour-12;
 //     return hour;
 //     }
 //     if(hour==12 )
-//     { 
+//     {
 //     return hour;
 //     }
 //     if(hour[0]==0 && hour[1]==0)
 //     {
 //     return 12;
 //     }
-
-
 
 // }
